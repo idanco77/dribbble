@@ -1,5 +1,17 @@
 <?php
 
 Route::get('/', function () {
-    return response()->json(['message' => 'hello world'], 200);
+    echo 'hello';
 });
+// public routes
+
+// Route group for authenticated users
+Route::group(['middleware' => ['auth:api']], function() {
+
+});
+
+// Routes for guests only
+Route::group(['middleware' => ['guest:api']], function() {
+    Route::post('register', 'Auth\RegisterController@register');
+});
+

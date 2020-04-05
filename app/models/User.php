@@ -29,6 +29,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'location'
     ];
 
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\VerifyEmail());
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

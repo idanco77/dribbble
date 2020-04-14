@@ -15,7 +15,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     use Notifiable, SpatialTrait;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'location',
         'tagline', 'about', 'username', 'formatted_address', 'available_to_hire'
     ];
 

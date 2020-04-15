@@ -31,6 +31,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         'location'
     ];
 
+    public function designs()
+    {
+        return $this->hasMany(Design::class);
+    }
+
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmail());

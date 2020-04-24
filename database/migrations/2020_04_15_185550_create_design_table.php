@@ -8,7 +8,7 @@ class CreateDesignTable extends Migration
 {
     public function up()
     {
-        Schema::create('design', function (Blueprint $table) {
+        Schema::create('designs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->string('image');

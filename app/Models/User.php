@@ -9,6 +9,13 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Grimzy\LaravelMysqlSpatial\Eloquent\SpatialTrait;
+use Eloquent;
+
+/**
+ * User
+ *
+ * @mixin Eloquent
+ */
 
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {

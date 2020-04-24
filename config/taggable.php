@@ -20,9 +20,6 @@ return [
      */
     //'normalizer'           => 'mb_strtolower',
     'normalizer'           => [Str::class, 'slug'],
-    'normalizer'           => function($normalized){
-        return Str::slug($normalized);
-    },
 
     /**
      * The database connection to use for the Tag model and associated tables.

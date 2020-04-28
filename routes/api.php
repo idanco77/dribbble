@@ -4,6 +4,12 @@
 Route::get('pass', function(){echo bcrypt('password');});
 Route::get('me', 'User\MeController@getMe');
 
+// get designs
+Route::get('designs', 'Designs\DesignController@index');
+
+// get users
+Route::get('users', 'User\UserController@index');
+
 // Route group for authenticated users
 Route::group(['middleware' => ['auth:api']], function() {
     Route::post('logout', 'Auth\LoginController@logout');

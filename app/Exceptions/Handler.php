@@ -62,6 +62,18 @@ class Handler extends ExceptionHandler
             ]], 404);
         }
 
+        if ($exception instanceof \BadMethodCallException && $request->expectsJson()) {
+            return response()->json(['error' => [
+                'message' => 'The method does not exists'
+            ]], 404);
+        }
+
+        if ($exception instanceof ModelNotDefined && $request->expectsJson()) {
+            return response()->json(['error' => [
+                'message' => 'No model defined'
+            ]], 500);
+        }
+
         return parent::render($request, $exception);
     }
 }

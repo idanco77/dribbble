@@ -6,6 +6,7 @@ Route::get('me', 'User\MeController@getMe');
 
 // get designs
 Route::get('designs', 'Designs\DesignController@index');
+Route::get('designs/{id}', 'Designs\DesignController@find');
 
 // get users
 Route::get('users', 'User\UserController@index');
@@ -18,8 +19,8 @@ Route::group(['middleware' => ['auth:api']], function() {
 
      // Upload Designs
     Route::post('designs', 'Designs\UploadController@upload');
-    Route::put('designs/{design}', 'Designs\DesignController@update');
-    Route::delete('designs/{design}', 'Designs\DesignController@destroy');
+    Route::put('designs/{id}', 'Designs\DesignController@update');
+    Route::delete('designs/{id}', 'Designs\DesignController@destroy');
 });
 
 // Routes for guests only

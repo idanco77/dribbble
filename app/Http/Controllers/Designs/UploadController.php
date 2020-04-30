@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Designs;
 use App\Http\Controllers\Controller;
 use App\Jobs\UploadImage;
 use App\Models\Design;
+use App\Repositories\Contracts\DesignContract;
+use GeoJson\Geometry\Point;
 use Illuminate\Http\Request;
 
 class UploadController extends Controller
 {
+    protected $designs;
+
+    public function __construct(DesignContract $designs)
+    {
+        $this->designs = $designs;
+    }
+
     public function upload(Request $request)
     {
         // validate the request
@@ -28,7 +37,7 @@ class UploadController extends Controller
         $tmp = $image->storeAs('uploads/original', $fileName, 'tmp');
 
         // create the db record for the design
-        $design = auth()->user()->designs()->create([
+        $design = $this->designs->createForCurrentUser('designs', [
             'image' => $fileName,
             'disk' => config('site.upload_disk'),
         ]);

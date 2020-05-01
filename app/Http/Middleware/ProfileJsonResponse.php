@@ -29,9 +29,11 @@ class ProfileJsonResponse
 
         if($response instanceof JsonResponse && $request->has('_debug')){
 
-            $response->setData(array_merge($response->getData(true), [
-                '_debug' => Arr::only(app('debugbar')->getData(), 'queries')
-            ]));
+            $response->setData(array_merge([
+                    '_debug' => Arr::only(app('debugbar')->getData(), 'queries')
+                ],
+                $response->getData(true)
+                ));
         }
 
         return $response;

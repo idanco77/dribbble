@@ -20,11 +20,14 @@ class DesignResource extends JsonResource
             'description' => $this->description,
             'slug' => $this->slug,
             'is_live' => $this->is_live,
+            'likes_count' => $this->likes()->count(),
             'created_at_human' =>  Carbon::parse($this->created_at)->format('d/m/Y'),
             'updated_at_human' =>  Carbon::parse($this->updated_at)->format('d/m/Y'),
             'image' => $this->images,
             'upload_successful' => $this->upload_successful,
             'disk' => $this->disk,
+            'comments' => CommentResource::collection($this->comments),
+            'user' => new UserResource($this->user),
         ];
     }
 }

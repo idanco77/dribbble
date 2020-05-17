@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Repositories\Contracts\{UserContract, DesignContract};
-use App\Repositories\Eloquent\{DesignRepository, UserRepository};
+use App\Repositories\Contracts\{CommentContract, UserContract, DesignContract};
+use App\Repositories\Eloquent\{CommentRepository, DesignRepository, UserRepository};
 
 use Illuminate\Support\ServiceProvider;
 
@@ -19,5 +19,6 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->bind(DesignContract::class, DesignRepository::class);
         $this->app->bind(UserContract::class, UserRepository::class);
+        $this->app->bind(CommentContract::class, CommentRepository::class);
     }
 }

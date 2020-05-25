@@ -1,7 +1,6 @@
 /node_modules
 /public/hot
 
-
 /vendor
 .env
 .env.backup
@@ -16,12 +15,4 @@ _ide_helper.php
 config/ide-helper.php
 .idea/*
 
-/storage/debugbar/*
-/storage/framework/cache/*
-/storage/framework/sessions/*
-/storage/framework/testing/*
-/storage/framework/views/*
-/storage/logs/*
-/storage/app/public/uploads/designs/large/*
-/storage/app/public/uploads/designs/original/*
-/storage/app/public/uploads/designs/thumbnail/*
+

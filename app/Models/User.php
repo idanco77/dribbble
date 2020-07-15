@@ -54,6 +54,12 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
             ->withTimestamps();
     }
 
+    // relationships for invitations
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class, 'recipient_email', 'email');
+    }
+
     public function ownedTeams()
     {
         return $this->teams()

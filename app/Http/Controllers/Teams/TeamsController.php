@@ -9,8 +9,7 @@ use App\Repositories\Contracts\TeamContract;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
-// todo: start lesson 4
-class TeamController extends Controller
+class TeamsController extends Controller
 {
     protected $teams;
 
@@ -27,7 +26,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:80', 'unique:teams.name']
+            'name' => ['required', 'string', 'max:80', 'unique:teams,name']
         ]);
 
         // create team in database
@@ -40,17 +39,29 @@ class TeamController extends Controller
         // current user is inserted as team member using boot method in Team model
 
         return new TeamResource($team);
-
     }
 
     public function fetchUserTeams()
     {
-
+        $teams = $this->teams->fetchUserTeams();
+        return TeamResource::collection($teams);
     }
 
-    public function update()
+    public function update(Request $request, $id)
     {
+        $team = $this->teams->find($id);
+        $this->authorize('update', $team);
 
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:80', 'unique:teams,name,' . $id]
+        ]);
+
+        $team = $this->teams->update($id, [
+            'name' => $request->name,
+            'slug' => Str::slug($request->name)
+            ]);
+
+        return new TeamResource($team);
     }
 
     public function destroy()
@@ -58,9 +69,10 @@ class TeamController extends Controller
 
     }
 
-    public function findById()
+    public function findById($id)
     {
-
+        $team = $this->teams->find($id);
+        return new TeamResource($team);
     }
 
     public function findBySlug()

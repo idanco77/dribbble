@@ -5,10 +5,16 @@ namespace App\Models;
 use App\Models\Traits\Likeable;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Comment
+ *
+ * @mixin \Eloquent
+ */
+
 class Comment extends Model
 {
     use Likeable;
-    
+
     protected $fillable = [
         'body',
         'user_id'

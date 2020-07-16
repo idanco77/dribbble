@@ -16,7 +16,6 @@ use Eloquent;
  *
  * @mixin Eloquent
  */
-
 class User extends Authenticatable implements JWTSubject, MustVerifyEmail
 {
     use Notifiable, SpatialTrait;
@@ -46,6 +45,33 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    // The teams that the user belongs to
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class)
+            ->withTimestamps();
+    }
+
+    // relationships for invitations
+    public function invitations()
+    {
+        return $this->hasMany(Invitation::class, 'recipient_email', 'email');
+    }
+
+    public function ownedTeams()
+    {
+        return $this->teams()
+            ->where('owner_id', $this->id);
+    }
+
+    public function isOwnerOfTeam($team)
+    {
+        return (bool)$this->teams()
+            ->where('id', $team->id)
+            ->where('owner_id', $this->id)
+            ->count();
     }
 
     public function sendEmailVerificationNotification()

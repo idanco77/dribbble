@@ -14,7 +14,7 @@ class UserResource extends JsonResource
             'username' => $this->username,
             'email' => $this->email,
             'name' => $this->name,
-            'designs' => $this->designs,
+            'designs' => DesignResource::collection($this->whenLoaded('designs')),
             'createdAt' => Carbon::parse($this->created_at)->format('d/m/Y'),
             'tagline' => $this->tagline,
             'about' => $this->about,

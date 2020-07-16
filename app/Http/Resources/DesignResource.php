@@ -26,6 +26,10 @@ class DesignResource extends JsonResource
             'image' => $this->images,
             'upload_successful' => $this->upload_successful,
             'disk' => $this->disk,
+            'team' => $this->team ? [
+                'name' => $this->team->name,
+                'slug' => $this->team->slug,
+            ] : null,
             'comments' => CommentResource::collection($this->comments),
             'user' => new UserResource($this->user),
         ];

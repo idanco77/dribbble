@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class DesignController extends Controller
+class  DesignController extends Controller
 {
     protected $designs;
 
